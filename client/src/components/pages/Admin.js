@@ -7,7 +7,7 @@ import { totalData, fruitsAndVegetables } from '../../FruitsAndVegetables';
 import Leaderboard from '../Leaderboard';
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT = "http://localhost:4010";
+const ENDPOINT = process.env.ENDPOINT || "http://localhost:4010";
 
 function Admin() {
     const [current, setCurrent] = useState(0);

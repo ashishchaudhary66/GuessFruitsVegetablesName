@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT = "http://localhost:4010";
+const ENDPOINT = process.env.ENDPOINT || "http://localhost:4010";
 let socket;
 
 function User() {
