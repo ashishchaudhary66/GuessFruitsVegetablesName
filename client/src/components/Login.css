@@ -1,0 +1,42 @@
+.login{
+    width: 21rem;
+    margin: 0 auto;
+}
+.login-user{
+    display: flex;
+    background-color: #242424;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    color: aliceblue;
+    gap:0.5rem;
+}
+#user{
+    width: 10rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+#admin{
+    width: 10rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.active{
+    background-color: red;
+}
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+#name{
+    padding: 1rem;
+}
+#room{
+    padding: 1rem;
+}
+.inputContainer button{
+    width: 9rem;
+}

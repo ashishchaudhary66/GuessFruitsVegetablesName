@@ -1,0 +1,22 @@
+/* Congratulation.css */
+
+.congratulation-container {
+    padding: 50px;
+    background-color: #282c34;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+.congratulation-container h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.congratulation-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
