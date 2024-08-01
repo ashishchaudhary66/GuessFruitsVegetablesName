@@ -24,8 +24,6 @@ function User({MAX_TIME}) {
     const [isCorrect, setIsCorrect] = useState(false);
     const [totalPoints, setTotalPoints] = useState(0);
 
-    const startupAudio=new Audio(sound);
-
     const navigate = useNavigate();
     const username = formData.name;
     const roomNumber = formData.roomNumber;
@@ -33,6 +31,7 @@ function User({MAX_TIME}) {
     const MAX_POINT = 100;
 
     useEffect(() => {
+        const startupAudio=new Audio(sound);
         socket = io(ENDPOINT, { transports: ['websocket'] });
         socket.emit('join_room', { username, roomNumber, isAdmin });
 
@@ -105,6 +104,7 @@ function User({MAX_TIME}) {
         fontSize: '18px',
         marginBottom: '20px',
     };
+    
 
     return (
         <div>
