@@ -2,7 +2,6 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const socketIo = require("socket.io");
-const { Socket } = require("dgram");
 
 const app = express();
 const PORT = process.env.PORT || 4010;
@@ -56,6 +55,11 @@ io.on("connection", (socket) => {
     socket.on("question", (data) => {
         console.log("question : ", data);
         io.to(rooms[socket.id]).emit("received_question", data);
+    });
+
+    socket.on('time_counter', (data) => {
+        const { time } = data;
+        io.to(rooms[socket.id]).emit('get_time', { time });
     });
 
     socket.on("game-started", (data) => {

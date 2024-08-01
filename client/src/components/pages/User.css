@@ -24,6 +24,7 @@
     margin: 0 auto;
     justify-content: space-between;
     overflow: hidden;
+    margin-bottom: 3rem;
 }
 
 #answerInput{

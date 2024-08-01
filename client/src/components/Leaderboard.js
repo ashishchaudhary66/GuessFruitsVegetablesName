@@ -19,6 +19,8 @@ function Leaderboard({ socket }) {
     };
     
     useEffect(() => {
+        if(!socket) return;
+
         const handleConnectedUser = (data) => {
             // Sort users by points in descending order
             const sortedUsers = data.userInfo.sort((a, b) => b.point - a.point);
@@ -34,7 +36,7 @@ function Leaderboard({ socket }) {
 
     return (
         <div style={leaderStyle}>
-            <h3>Leader Board </h3>
+            <h3>Leaderboard </h3>
             {users.map((user, index) => (
                 <div style={userStyle} key={index}>
                     <div>{index+1}</div>

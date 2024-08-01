@@ -8,17 +8,18 @@ import Congratulation from './components/pages/Congratulation';
 
 
 function App() {
+  const MAX_TIME=25;
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Fun Friday Game: Unscramble the Fruits on Vegetables Name</h1>
+        <h1>Fun Friday Game: Unscramble the Fruits/Vegetables Name</h1>
       </header>
       <main>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Login/>} />
-            <Route path='/admin' element={<Admin/>} />
-            <Route path='/user' element={<User/>} />
+            <Route path='/admin' element={<Admin MAX_TIME={MAX_TIME} />} />
+            <Route path='/user' element={<User MAX_TIME={MAX_TIME} />} />
             <Route path='/congratulation' element={<Congratulation/>} />
           </Routes>
         </BrowserRouter>

@@ -7,22 +7,31 @@ import { totalData, fruitsAndVegetables } from '../../FruitsAndVegetables';
 import Leaderboard from '../Leaderboard';
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT = process.env.ENDPOINT || "http://localhost:4010";
+const ENDPOINT = "https://guess-fruits-vegetables-name.onrender.com";
 
-function Admin() {
+function Admin({ MAX_TIME }) {
     const [current, setCurrent] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
+    const [time, setTime] = useState(MAX_TIME);
     const username = formData.name;
     const roomNumber = formData.roomNumber;
     const isAdmin = formData.isAdmin;
     const navigate = useNavigate();
     const [socket, setSocket] = useState(null);
 
+    const resetTime = (newTime) => {
+        setTime(newTime);
+        if (socket) {
+            socket.emit('time_counter', { time: newTime });
+        }
+    };
+
     const next = () => {
         setShowAnswer(false);
         const newCurrent = (current + 1) % totalData;
         setCurrent(newCurrent);
+        resetTime(MAX_TIME);
         socket.emit('question', { ...fruitsAndVegetables[newCurrent], current: newCurrent, roomNumber });
     };
 
@@ -30,11 +39,13 @@ function Admin() {
         setShowAnswer(false);
         const newCurrent = ((current + totalData) - 1) % totalData;
         setCurrent(newCurrent);
+        resetTime(MAX_TIME);
         socket.emit('question', { ...fruitsAndVegetables[newCurrent], current: newCurrent, roomNumber });
     };
 
     const startGame = () => {
         setGameStarted(true);
+        resetTime(MAX_TIME);
         socket.emit('game-started', { gameStarted: true, roomNumber, current, ...fruitsAndVegetables[current] });
     };
 
@@ -44,9 +55,9 @@ function Admin() {
 
         newSocket.emit('join_room', { username, roomNumber, isAdmin });
 
-        newSocket.on('admin_exists', (data) => {
+        newSocket.on('admin_exists', () => {
             navigate('/');
-        })
+        });
 
         newSocket.on('game-topper', (data) => {
             navigate('/congratulation', { state: { topper: data.topper } });
@@ -56,6 +67,21 @@ function Admin() {
             newSocket.disconnect();
         };
     }, [username, roomNumber, isAdmin, navigate]);
+
+    useEffect(() => {
+        if (gameStarted && time > 0) {
+            const timerId = setInterval(() => {
+                setTime((prevTime) => {
+                    const newTime = prevTime - 1;
+                    if (socket) {
+                        socket.emit('time_counter', { time: newTime });
+                    }
+                    return newTime;
+                });
+            }, 1000);
+            return () => clearInterval(timerId);
+        }
+    }, [gameStarted, time, socket]);
 
     const buttonStyle = {
         margin: '10px',
@@ -96,7 +122,7 @@ function Admin() {
         maxWidth: '1080px',
         display: 'flex',
         justifyContent: 'space-evenly',
-    }
+    };
 
     const endGame = () => {
         socket.emit('game-ended');
@@ -111,7 +137,7 @@ function Admin() {
                     <div style={welcomeStyle}>
                         <div>
                             <h2 style={headingStyle}>Welcome to the Fun Friday Game!</h2>
-                            <p style={paragraphStyle}>Unscramble the Fruits or Vegetables Name.</p>
+                            <p style={paragraphStyle}>Unscramble the Fruits/Vegetables Name.</p>
                             <button style={buttonStyle} onClick={startGame}>Start Game</button>
                         </div>
                         {
@@ -122,13 +148,13 @@ function Admin() {
                     <div style={AdminContainer}>
                         <div>
                             <h3>{current + 1}/{totalData}</h3>
-                            <JumbledTitle title={fruitsAndVegetables[current].jumbled} time={0} />
+                            <JumbledTitle title={fruitsAndVegetables[current].jumbled} time={time} />
                             {showAnswer && <Answer answer={fruitsAndVegetables[current].original} />}
                             <button style={buttonStyle} onClick={previous}>Previous</button>
                             <button style={buttonStyle} onClick={() => setShowAnswer(!showAnswer)}>
                                 {showAnswer ? "Hide Answer" : "Show Answer"}
                             </button>
-                            <button style={buttonStyle} onClick={endGame}> End Game </button>
+                            <button style={buttonStyle} onClick={endGame}>End Game</button>
                             <button style={buttonStyle} onClick={next}>Next</button>
                         </div>
                         {
