@@ -5,6 +5,7 @@ import JumbledTitle from '../JumbledTitle';
 import Answer from '../Answer';
 import './User.css';
 import io from 'socket.io-client';
+import sound from '../../audio//chin.mp3'
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +24,8 @@ function User({MAX_TIME}) {
     const [isCorrect, setIsCorrect] = useState(false);
     const [totalPoints, setTotalPoints] = useState(0);
 
+    const startupAudio=new Audio(sound);
+
     const navigate = useNavigate();
     const username = formData.name;
     const roomNumber = formData.roomNumber;
@@ -40,6 +43,7 @@ function User({MAX_TIME}) {
             setAnswer(data.original);
             setIncrease(0);
             setIsCorrect(false);
+            startupAudio.play();
         });
 
         socket.on('get_time', (data) => {

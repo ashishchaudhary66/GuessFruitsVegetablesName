@@ -9,12 +9,15 @@ const JumbledTitle = ({ title, time}) => {
   };
 
   const timerStyle={
-    fontSize:'40px',
-    width:'60px',
-    height:'60px',
+    fontSize:'15px',
+    width:'30px',
+    height:'30px',
     borderRadius:'50%',
     backgroundColor:'#ff0000',
-    margin:"0px auto",
+    margin:'0 auto',
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center'
   }
   return (
     <div>
