@@ -1,2 +1,2 @@
-Backend: https://guess-fruits-vegetables-name.onrender.com/
-Frontend: https://ashishchaudhary-unscramble-game.netlify.app/
+Backend: https://guess-fruits-vegetables-name.onrender.com/ <br/>
+Frontend: https://ashishchaudhary-guess-fruits-veg-name.netlify.app/
