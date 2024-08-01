@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT = "https://guess-fruits-vegetables-name.onrender.com";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 let socket;
 
 function User({MAX_TIME}) {

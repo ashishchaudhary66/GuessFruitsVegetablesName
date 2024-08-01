@@ -7,7 +7,7 @@ import { totalData, fruitsAndVegetables } from '../../FruitsAndVegetables';
 import Leaderboard from '../Leaderboard';
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT = "https://guess-fruits-vegetables-name.onrender.com";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 function Admin({ MAX_TIME }) {
     const [current, setCurrent] = useState(0);
