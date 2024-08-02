@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import sound from '../../audio//dance.mp3'
 import Confetti from 'react-confetti';
 import "./Congratulation.css";
 
@@ -9,7 +10,7 @@ const Congratulation = () => {
   const location = useLocation();
   const { topper } = location.state || {};
   const navigate = useNavigate();
-
+  const congratsAudio=new Audio(sound);
   const buttonStyle = {
     margin: '10px',
     padding: '10px 20px',
@@ -24,6 +25,7 @@ const Congratulation = () => {
   if (!topper) {
     navigate("/");
     return null;
+    congratsAudio.play();
   }
 
   return (
