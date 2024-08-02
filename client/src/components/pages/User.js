@@ -5,7 +5,7 @@ import JumbledTitle from '../JumbledTitle';
 import Answer from '../Answer';
 import './User.css';
 import io from 'socket.io-client';
-import sound from '../../audio//chin.mp3'
+import sound from '../../audio//chim.mp3'
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { useNavigate } from 'react-router-dom';
 
