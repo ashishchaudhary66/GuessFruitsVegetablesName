@@ -25,8 +25,9 @@ const Congratulation = () => {
   if (!topper) {
     navigate("/");
     return null;
-    congratsAudio.play();
   }
+
+  congratsAudio.play();
 
   return (
     <>
