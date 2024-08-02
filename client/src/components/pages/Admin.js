@@ -6,6 +6,7 @@ import { formData } from '../Login';
 import { totalData, fruitsAndVegetables } from '../../FruitsAndVegetables';
 import Leaderboard from '../Leaderboard';
 import { useNavigate } from 'react-router-dom';
+import sound from '../../audio//chim.mp3'
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
@@ -26,13 +27,17 @@ function Admin({ MAX_TIME }) {
             socket.emit('time_counter', { time: newTime });
         }
     };
-
+   const playSound = () => {
+        const startupAudio=new Audio(sound);
+        startupAudio.play();
+   }
     const next = () => {
         setShowAnswer(false);
         const newCurrent = (current + 1) % totalData;
         setCurrent(newCurrent);
         resetTime(MAX_TIME);
         socket.emit('question', { ...fruitsAndVegetables[newCurrent], current: newCurrent, roomNumber });
+        playSound();
     };
 
     const previous = () => {
@@ -41,12 +46,14 @@ function Admin({ MAX_TIME }) {
         setCurrent(newCurrent);
         resetTime(MAX_TIME);
         socket.emit('question', { ...fruitsAndVegetables[newCurrent], current: newCurrent, roomNumber });
+        playSound();
     };
 
     const startGame = () => {
         setGameStarted(true);
         resetTime(MAX_TIME);
         socket.emit('game-started', { gameStarted: true, roomNumber, current, ...fruitsAndVegetables[current] });
+        playSound();
     };
 
     useEffect(() => {
