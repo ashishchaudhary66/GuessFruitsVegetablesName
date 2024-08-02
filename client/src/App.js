@@ -8,7 +8,7 @@ import Congratulation from './components/pages/Congratulation';
 
 
 function App() {
-  const MAX_TIME=25;
+  const MAX_TIME=20;
   return (
     <div className="App">
       <header className="App-header">
