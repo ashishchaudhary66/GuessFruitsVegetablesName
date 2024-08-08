@@ -47,6 +47,9 @@ function User({MAX_TIME}) {
 
         socket.on('get_time', (data) => {
             setTime(data.time);
+            if(data.time===0){
+                setCurrentText('');
+            }
         });
 
         socket.on('game-topper', (data) => {

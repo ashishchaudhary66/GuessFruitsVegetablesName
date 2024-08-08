@@ -108,7 +108,7 @@ function Admin({ MAX_TIME }) {
         borderRadius: '10px',
         textAlign: 'center',
         margin: '50px auto',
-        maxWidth: '600px',
+        maxWidth: '800px',
         display: 'flex',
         justifyContent: 'space-between',
     };
